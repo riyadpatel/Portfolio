@@ -13,3 +13,7 @@ cpuSimulator.java
 
 frequencyAnalysis.py
 • Implemented python libraries to create a frequency analysis tool which collects information of single, double, and three letter sets to isolate the patterns in the text inputed
+
+UrgencyDetect.py
+• Trains a logistic regression model on sample emails to differentiate between Urgent and not
+• Demonstrates blend of machine learning, natural language processing, and UI development
