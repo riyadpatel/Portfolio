@@ -1,6 +1,7 @@
 # Portfolio
 
 FlowerGarden.pro 
+• Prolog program helps design a garden by arranging flowers based on specific rules to create valid garden of 28 flowers.
 
 chainMatrix.c 
 • Developed and implemented an efficient algorithm to determine the optimal order of multiplying matrices in a chain using dynamic programming 
