@@ -1,0 +1,73 @@
+#RIYA PATEL FREQUENCY ANALYSIS CODE
+from collections import Counter
+import re
+
+def wordFrequency(input ):
+    # take out everything but letters and spaces
+    # turns everything into lower case
+    input = re.sub( r'[^a-z\s]' , '',  input.lower() )
+    
+    # Break input up by words, so that bigram and trigram are taken from words and not just letters near eachother
+    #xn is not same as x n
+    words = input.split()
+    
+    # initlize varibles for single letter, bigram and trigram with a new empty counter
+    oneLetter = Counter()
+    bigram = Counter()
+    trigram = Counter()
+    
+    # the counter is updted through each word 
+    #update() is part of Counter it counts occurnaces and adds them to current value
+    for word in words:
+        #counts each letter in teh word
+        oneLetter.update( word)
+        #counts the pair of letters by indexing with 2 so you start with 2 letters and range is 1 minus to get the endslength to 
+        bigram.update( word[i:i+2] for i in range(len( word) - 1))
+        # same logic as bigram but 3 letters and minus 2 so loop stops running when we have gone through all 3 sets of letters in a word
+        trigram.update( word[i:i+3] for i in range(len(word ) - 2))
+    
+    # Sorts the counter values by highest frequncy
+    #most_common function looks at most common to least
+    orderedSingle =oneLetter.most_common()
+    #stops at top 30 
+    orderedBigram= bigram.most_common( 30)
+    orderedTrigram = trigram.most_common(30 )
+    
+    # Print out results
+    #loops through the order list sets and prints the letter and its frequency out
+    print("One Letters Frequency:" )
+    for letter, frequency in orderedSingle:
+        print(f"{letter}: {frequency}" )
+    
+    print("\nTop 30 Bigrams Frequency:" )
+    for bigram, frequency in orderedBigram:
+        print(f"{bigram}: {frequency}")
+    
+    print("\nTop 30 Trigrams Frequency:" )
+    for trigram, frequency in orderedTrigram:
+        print( f"{trigram}: {frequency}" )
+
+
+# Example texts
+cipher = """
+bt jpx rmlx pcuv amlx icvjp ibtwxvr ci m lmt'r pmtn, mtn yvcjx cdxv mwmbtrj jpx amtngxrjbah uqct
+jpx qgmrjxv ci jpx ymgg ci jpx hbtw'r qmgmax; mtn jpx hbtw rmy jpx qmvj ci jpx pmtn jpmj yvcjx.
+jpxt jpx hbtw'r acutjxtmtax ymr apmtwxn, mtn pbr jpcuwpjr jvcufgxn pbl, rc jpmj jpx scbtjr ci pbr
+gcbtr yxvx gccrxn, mtn pbr htxxr rlcjx ctx mwmbtrj mtcjpxv. jpx hbtw avbxn mgcun jc fvbtw bt jpx
+mrjvcgcwxvr, jpx apmgnxmtr, mtn jpx rccjprmexvr. mtn jpx hbtw rqmhx, mtn rmbn jc jpx ybrx lxt
+ci fmfegct, ypcrcxdxv rpmgg vxmn jpbr yvbjbtw, mtn rpcy lx jpx btjxvqvxjmjbct jpxvxci, rpmgg fx
+agcjpxn ybjp ramvgxj, mtn pmdx m apmbt ci wcgn mfcuj pbr txah, mtn rpmgg fx jpx jpbvn vugxv
+bt jpx hbtwncl. jpxt amlx bt mgg jpx hbtw'r ybrx lxt; fuj jpxe acugn tcj vxmn jpx yvbjbtw, tcv lmhx
+htcyt jc jpx hbtw jpx btjxvqvxjmjbct jpxvxci. jpxt ymr hbtw fxgrpmoomv wvxmjge jvcufgxn, mtn
+pbr acutjxtmtax ymr apmtwxn bt pbl, mtn pbr gcvnr yxvx mrjctbrpxn. tcy jpx kuxxt, fe vxmrct ci
+jpx ycvnr ci jpx hbtw mtn pbr gcvnr, amlx btjc jpx fmtkuxj pcurx; mtn jpx kuxxt rqmhx mtn rmbn, c
+hbtw, gbdx icvxdxv; gxj tcj jpe jpcuwpjr jvcufgx jpxx, tcv gxj jpe acutjxtmtax fx apmtwxn; jpxvx br
+m lmt bt jpe hbtwncl, bt ypcl br jpx rqbvbj ci jpx pcge wcnr; mtn bt jpx nmer ci jpe ybrncl ci jpx
+wcnr, ymr icutn bt pbl; ypcl jpx hbtw txfuapmntxoomv jpe imjpxv, jpx hbtw, b rme, jpe imjpxv,
+lmnx lmrjxv ci jpx lmwbabmtr, mrjvcgcwxvr, apmgnxmtr, mtn rccjprmexvr; icvmrluap mr mt
+xzaxggxtj rqbvbj, mtn htcygxnwx, mtn utnxvrjmtnbtw, btjxvqvxjbtw ci nvxmlr, mtn rpcybtw ci
+pmvn rxtjxtaxr, mtn nbrrcgdbtw ci ncufjr, yxvx icutn bt jpx rmlx nmtbxg, ypcl jpx hbtw tmlxn
+fxgjxrpmoomv; tcy gxj nmtbxg fx amggxn, mtn px ybgg rpcy jpx btjxvqvxjmjbct.
+"""
+
+wordFrequency(cipher)
